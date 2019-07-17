@@ -6,9 +6,11 @@ import createLogger from 'vuex/dist/logger';
 
 Vue.use(Vuex);
  import home from "./modules/home"
+ import picture from "./modules/picture"
 export default new Vuex.Store({
     modules: {
-       home
+       home,
+       picture
     },
     plugins: [createLogger()]
 })

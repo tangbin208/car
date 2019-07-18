@@ -13,7 +13,7 @@
         >{{item}}</span>
       </p>
       <ul>
-        <li v-for="val in Object.values(allColor[item])" :key="val.ColorId" @click="toPicture(val)">
+        <li v-for="val in Object.values(allColor[item]||{})" :key="val.ColorId" @click="toPicture(val)">
           <span :style="{background:val.Value}"></span>
           {{val.Name}}
         </li>
@@ -41,6 +41,7 @@ export default Vue.extend({
   methods: {
     ...mapActions({
       getAllColor: "picture/getAllColor",
+      getColorPicture:"picture/getColorPicture"
     }),
     tabs(val: string,ind:number) {
       this.item = val;
@@ -51,6 +52,7 @@ export default Vue.extend({
         name:"picture",
         params:val
       })
+      //  this.getColorPicture({ColorID: val.ColorID });
     }
   },
   created() {

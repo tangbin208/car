@@ -3,11 +3,11 @@ import {toDetailData,getAllColor,getCarImg} from "../../server/home"
 const state={
   pictureList:[],
   SerialID:"2593",
-   Page:1,
-   PageSize:30,
    detailPictureList:[],
    allColor:{},
-   ImageID:Number
+   ImageID:null,
+   
+   isload:false
 }
 
 //派生数据
@@ -23,15 +23,28 @@ const actions={
       })
       commit("updatePicture",data.data)
     },
-    async toDetail({commit,state},ImageID:string){
-      console.log("imgId",ImageID)
-      ImageID&&commit("updateImageId",ImageID)
+    async toDetail({commit,state},{ImageID=state.ImageID,ColorID,Page=1,PageSize=30}){
+      if(Page===1){
+        await commit("updateIsLoad",false)
+      }
+      if(state.isload)return
+      commit("updateImageId",ImageID)
       let data= await toDetailData({
         SerialID:state.SerialID,
         ImageID:ImageID||state.ImageID,
-        Page:state.Page,
-        PageSize:state.PageSize
+        ColorID:ColorID||null,
+        Page:Page,
+        PageSize:PageSize
       })
+      if(data.data.List.length<30){
+           await commit("updateIsLoad",true)
+      }
+      if(Page>1){
+        data.data={
+          ...data.data,
+          List:state.detailPictureList.List.concat(data.data.List)
+        }
+      }
       commit("updateDetailPictureList",data.data)
     },
     //获取全部颜色
@@ -48,6 +61,10 @@ const actions={
       })
       commit('updatePicture',data.data)
     },
+    //改变page
+    async getPage({dispatch},{ColorID,Page,PageSize}){
+       await dispatch("toDetail",{Page,ColorID,PageSize})
+    }
 }
 //同步改变
 const mutations={
@@ -74,9 +91,16 @@ const mutations={
         state.allColor=payload
       },
       updateImageId(state,id=0){
-        console.log("Id",id)
+        console.log("id",id)
         state.ImageID=id
-      }   
+      },
+      updataPage(state,page){
+        state.Page=page
+      },
+      updateIsLoad(state,payload){
+        console.log("state",payload)
+        state.isload=payload
+      }
 
 }
 

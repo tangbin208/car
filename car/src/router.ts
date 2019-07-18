@@ -1,6 +1,6 @@
 import Vue from 'vue';
 import Router from 'vue-router';
-import Home from './views/Home.vue';
+import Home from './views/home.vue';
 const Picture=()=>import("./views/picture.vue")
 const Color=()=>import("./views/color.vue")
 const Type=()=>import("./views/type.vue")

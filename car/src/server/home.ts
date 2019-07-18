@@ -23,7 +23,6 @@ export function getListPicture({SerialID}){
 }
 //获取图片详情数据  轮播
 export function toDetailData(payload){
-	console.log("sss",payload)
 	return request({
 		url:'/v2-car-getCategoryImageList.html?',
 		method: 'GET',

@@ -1,8 +1,9 @@
 <template>
   <div class="wrap">
     <div class="top">
-      <router-link to="/color" tag="span">{{this.color.Name||'颜色'}}</router-link>|
-      <router-link to="/type" tag="span">{{type}}</router-link>
+      <!-- {{this.color.Name||'颜色'}} {{type}} -->
+      <router-link to="/color" tag="span">{{getColorId.Name||'颜色'}}</router-link>
+      <router-link to="/type" tag="span">{{getTypeId.car_name?(getTypeId.market_attribute?getTypeId.market_attribute.year+"款":'')+getTypeId.car_name:'车款'}}</router-link>
     </div>
     <div v-if="isShow" v-show="!isSwiper" class="main">
       <!-- 图片列表   -->
@@ -50,7 +51,7 @@
         </div>
       </div>
       <span class="count">{{swiperIndex}}/{{detailPictureList.Count}}</span>
-      <span class="price">询最低价</span>
+      <span class="price" @click="low">询最低价</span>
     </div>
   </div>
 </template>
@@ -65,23 +66,21 @@ export default Vue.extend({
   data() {
     return {
       isShow: true, //控制图片详情显隐
-      color: {
-        Name: "颜色"
-      },
-      type: "车款",
-      CarID: null,
-      ColorID: null,
       isSwiper: false, //控制轮播图显隐
       swiperIndex: 1,
       Page: 1,
       PageSize: 30,
-      count:0
     };
   },
   computed: {
     ...mapState({
       pictureList: (state: any) => state.picture.pictureList,
       detailPictureList: (state: any) => state.picture.detailPictureList,
+      getColorId:(state:any)=>state.picture.getColorId,
+      getTypeId:(state:any)=>state.picture.getTypeId
+    }),
+    ...mapGetters({
+      sortArr:"car/sortArr",
     })
   },
   methods: {
@@ -100,7 +99,7 @@ export default Vue.extend({
       } else {
         this.mySwiper(ind);
       }
-       this.toDetail({ ImageID, ColorID: this.color.ColorId});
+       this.toDetail({ ImageID, ColorID: this.getColorId.ColorId});
     },
     //轮播图
     mySwiper(ind: number) {
@@ -115,7 +114,9 @@ export default Vue.extend({
               that.swiperIndex = this.activeIndex + 1;
               if (that.swiperIndex === that.Page * that.PageSize - 5) {
                 that.getPage({
-                  ColorID: that.color.ColorId
+                  ColorID: that.getColorId.ColorId,
+                   Page:++that.Page,
+                   PageSize:that.PageSize
                 });
               }
             }
@@ -137,38 +138,43 @@ export default Vue.extend({
       //可滚动容器超出当前窗口显示范围的高度
       let scrollTop = this.$refs.imgList.scrollTop;
       //scrollTop在页面为滚动时为0，开始滚动后，慢慢增加，滚动到页面底部时，出现innerHeight < (outerHeight + scrollTop)的情况，严格来讲，是接近底部。
-      //console.log(innerHeight + " " + outerHeight + " " + scrollTop);
+      // console.log(innerHeight + " " + outerHeight + " " + scrollTop);
       if (innerHeight < outerHeight + scrollTop) {
-        //加载更多操作
-        let timer = 0;
-        clearTimeout(timer);
-        timer = setTimeout(() => {
+        // //加载更多操作
+        clearTimeout(this.timer);
+        this.timer = setTimeout(() => {
           this.getPage({
-            ColorID: this.color.ColorId,
+            ColorID: this.getColorId.ColorId,
             Page:++this.Page,
             PageSize:this.PageSize
           });
         }, 500);
       }
+    },
+    //去询问低价
+    low(){
+      this.$router.push({
+        name:"quotation",
+        params:{
+          car_id:this.getTypeId.car_id||this.sortArr[0].list[0].car_id
+        }
+      })
     }
   },
   created() {
-    // console.log(this.$route.params);
-    this.color = this.$route.params;
-    console.log(this.color);
-    let ColorID = this.$route.params.ColorId || null;
-    let CarID = this.$route.params.CarID || null;
-    // this.type=this.$route.params.CarID||null
-    // console.log("cid",ColorID)
-    this.getColorPicture({ ColorID, CarID });
+     this.timer=0
+     this.getColorPicture();
   },
   updated() {},
-  mounted() {}
+  mounted() {
+    console.log("deta",this.getTypeId)
+  }
 });
 </script>
 <style scoped lang="scss">
 .wrap {
-  flex: 1;
+  width: 100%;
+  height: 100%;
   background: #f4f4f4;
   display: flex;
   flex-direction: column;
@@ -186,14 +192,19 @@ export default Vue.extend({
   width: 100%;
   height: 40px;
   display: flex;
-  font-size: 0.32rem;
   align-items: center;
   background: #fff;
   color: #454545;
   border-bottom: 6px solid #f4f4f4;
   span {
     flex: 1;
+    padding: 0 20px;
+    box-sizing: border-box;
     text-align: center;
+    font-size: 14px;
+  }
+  span:first-child{
+    border-right: 1px solid #ccc;
   }
 }
 .list {

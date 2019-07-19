@@ -25,7 +25,7 @@
           <li>
             <h4>{{item.GroupName}}</h4>
             <ol>
-              <li class="maskLi" v-for="val in item.GroupList" :key="val.SerialID">
+              <li class="maskLi" v-for="val in item.GroupList" :key="val.SerialID" @click="toCar(val.SerialID)">
                 <img class="picture" :src="val.Picture" />
                 <p>
                   <span class="aliasName">{{val.AliasName}}</span>
@@ -85,7 +85,7 @@ export default Vue.extend({
     touchStart(e: Event): void {
       this.isTouch = true;
     },
-    touchMove(e: Event): void {
+    touchMove(e: any): void {
       // console.log('e...', e);
       let pageY = e.touches[0].pageY;
       let letterHeight = ((0.4 * window.innerWidth) / 750) * 100;
@@ -107,6 +107,14 @@ export default Vue.extend({
     touchEnd(e: Event): void {
       this.isTouch = false;
       this.current = "";
+    },
+    toCar(SerialID:string){
+      this.$router.push({
+        name:"car",
+        params:{
+          id:SerialID
+        }
+      })
     }
   },
   created() {
@@ -176,7 +184,7 @@ ul {
     color: #666;
     font-weight: 500;
     padding: 2px 10px;
-    font-size: 0.24rem;
+    font-size: 0.3rem;
   }
 }
 .mask {
@@ -191,6 +199,10 @@ ul {
   box-sizing: border-box;
   overflow-y: auto;
   border-left: 1px solid #eee;
+  ol li{
+    padding-left: 10px;
+     box-sizing: border-box;
+  }
   &.show {
     transform: translateX(0);
     transition: all 1s;
@@ -208,6 +220,9 @@ ul {
   .aliasName {
     font-size: 0.34rem;
     color: #5f687a;
+    width: 100%;
+    padding-right: 10px;
+    box-sizing: border-box;
   }
   .price {
     margin-top: 0.1rem;

@@ -1,7 +1,7 @@
 <template>
   <div class="wrap">
     <div class="top">
-      <h5  @click="toPicture({Name:'全部颜色'})">全部颜色</h5>
+      <h5 @click="toPicture({Name:'全部颜色'})">全部颜色</h5>
     </div>
     <div class="nav">
       <p>
@@ -13,7 +13,7 @@
         >{{item}}</span>
       </p>
       <ul>
-        <li v-for="val in Object.values(allColor[item]||{})" :key="val.ColorId" @click="toPicture(val)">
+        <li v-for="val in allColor[item]" :key="val.ColorId" @click="toPicture(val)">
           <span :style="{background:val.Value}"></span>
           {{val.Name}}
         </li>
@@ -30,7 +30,7 @@ export default Vue.extend({
   data() {
     return {
       item: "2017",
-      ind:0
+      ind: 0
     };
   },
   computed: {
@@ -41,24 +41,35 @@ export default Vue.extend({
   methods: {
     ...mapActions({
       getAllColor: "picture/getAllColor",
-      getColorPicture:"picture/getColorPicture"
+      getColorPicture: "picture/getColorPicture"
     }),
-    tabs(val: string,ind:number) {
+    ...mapMutations({
+      getColorId: "picture/getColorId"
+    }),
+    tabs(val: string, ind: number) {
       this.item = val;
-      this.ind=ind
+      this.ind = ind;
     },
-    toPicture(val){
+    //去图片页
+    async toPicture(color: object) {
+      await this.getColorId(color);
       this.$router.push({
-        name:"picture",
-        params:val
-      })
-      //  this.getColorPicture({ColorID: val.ColorID });
+        name: "picture"
+      });
+    },
+    async init() {
+      await this.getAllColor();
+      this.item = Object.keys(this.allColor).reverse()[0];
     }
   },
   created() {
-    this.getAllColor();
+      this.init();
   },
-  mounted() {}
+  mounted() {
+    console.log("all", this.allColor);
+
+    console.log("item", this.item);
+  }
 });
 </script>
 <style scoped lang="scss">
@@ -94,7 +105,7 @@ export default Vue.extend({
     margin-bottom: 6px;
     span {
       padding-right: 0.42rem;
-      &.active{
+      &.active {
         color: #00afff;
       }
     }
@@ -105,7 +116,7 @@ export default Vue.extend({
     display: flex;
     flex-wrap: wrap;
     background: #fff;
-    padding: 0 .2rem;
+    padding: 0 0.2rem;
     box-sizing: border-box;
     li {
       width: 47%;
@@ -113,7 +124,7 @@ export default Vue.extend({
       line-height: 0.68rem;
       border: 1px solid #3aacff;
       box-sizing: border-box;
-      margin: 0.2rem .1rem;
+      margin: 0.2rem 0.1rem;
       border-radius: 0.05rem;
       display: flex;
       align-items: center;

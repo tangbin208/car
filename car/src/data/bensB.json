@@ -1,0 +1,260 @@
+{
+    "code": 1,
+    "msg": "成功",
+    "data": {
+        "ShowBottomEntrance": 1,
+        "BottomEntranceTitle": "询问底价",
+        "BottomEntranceSubTitle": "- 实价有差异，获取本地4S店报价 -",
+        "BottomEntranceJump": "1",
+        "BottomEntranceLink": "http://baojia.chelun.com/yiche-redirectYicheWeb.html?ycre_serialid=2616&ycre_carid=130769&ycre_cityid=0&ycre_flag=3&ycre_from=1&ycre_isNew=1",
+        "SerialID": "2616",
+        "AliasName": "奔驰B级",
+        "BrandName": "奔驰",
+        "CoverPhoto": "http://img4.bitautoimg.com/autoalbum/files/20150609/763/17285576361435_4103963_8.JPG",
+        "CoverPhotoSize": 3,
+        "Picture": "http://img2.bitautoimg.com/autoalbum/files/20180802/044/0258270445_3.jpg",
+        "Spelling": "BJ",
+        "AllSpell": "bji",
+        "pic_group_count": 2253,
+        "brand": {
+            "MasterID": "2"
+        },
+        "market_attribute": {
+            "car_level_name": "紧凑型车",
+            "country": "5",
+            "country_name": "德国",
+            "dealer_price": "14.58-33.98万",
+            "official_refer_price": "22.58-33.98万",
+            "sale_status": "在销",
+            "buy_car_price": "",
+            "buy_car_detail_url": "https://bu.chelun.com/xunjia-new/?SerialID=2616&default_car_id=130769&city_id=&cl=0",
+            "price_reduction": "",
+            "oil_consume": "6.3-6.6L"
+        },
+        "jtexts": "",
+        "list": [
+            {
+                "car_id": "130769",
+                "car_name": "B 180",
+                "trans_type": "双离合",
+                "gear_num": "7",
+                "exhaust": "1.6",
+                "exhaust_str": "1.6L",
+                "horse_power": "122",
+                "add_press_type": "",
+                "inhale_type": "涡轮增压",
+                "max_power": "90",
+                "max_power_str": "90kW",
+                "peak_power": "",
+                "peak_power_str": "",
+                "link": "http://baojia.chelun.com/yiche-redirectYicheWeb.html?ycre_serialid=2616&ycre_carid=130769&ycre_cityid=0&ycre_flag=1",
+                "jtexts": "",
+                "link_from": "",
+                "market_attribute": {
+                    "year": "2019",
+                    "dealer_price": "14.58-22.58万",
+                    "dealer_price_max": "22.58万",
+                    "dealer_price_min": "14.58万",
+                    "official_refer_price": "22.08万",
+                    "sale_status": "在销",
+                    "buy_car_detail_url": "https://bu.chelun.com/xunjia-new/?SerialID=2616&city_id=&car_id=130769&cl=0"
+                }
+            },
+            {
+                "car_id": "130770",
+                "car_name": "B 200 动感版",
+                "trans_type": "双离合",
+                "gear_num": "7",
+                "exhaust": "1.6",
+                "exhaust_str": "1.6L",
+                "horse_power": "156",
+                "add_press_type": "",
+                "inhale_type": "涡轮增压",
+                "max_power": "115",
+                "max_power_str": "115kW",
+                "peak_power": "",
+                "peak_power_str": "",
+                "link": "http://baojia.chelun.com/yiche-redirectYicheWeb.html?ycre_serialid=2616&ycre_carid=130770&ycre_cityid=0&ycre_flag=1",
+                "jtexts": "",
+                "link_from": "",
+                "market_attribute": {
+                    "year": "2019",
+                    "dealer_price": "16.38-24.38万",
+                    "dealer_price_max": "24.38万",
+                    "dealer_price_min": "16.38万",
+                    "official_refer_price": "23.88万",
+                    "sale_status": "在销",
+                    "buy_car_detail_url": "https://bu.chelun.com/xunjia-new/?SerialID=2616&city_id=&car_id=130770&cl=0"
+                }
+            },
+            {
+                "car_id": "130771",
+                "car_name": "B 200 时尚版",
+                "trans_type": "双离合",
+                "gear_num": "7",
+                "exhaust": "1.6",
+                "exhaust_str": "1.6L",
+                "horse_power": "156",
+                "add_press_type": "",
+                "inhale_type": "涡轮增压",
+                "max_power": "115",
+                "max_power_str": "115kW",
+                "peak_power": "",
+                "peak_power_str": "",
+                "link": "http://baojia.chelun.com/yiche-redirectYicheWeb.html?ycre_serialid=2616&ycre_carid=130771&ycre_cityid=0&ycre_flag=1",
+                "jtexts": "",
+                "link_from": "",
+                "market_attribute": {
+                    "year": "2019",
+                    "dealer_price": "18.18-26.28万",
+                    "dealer_price_max": "26.28万",
+                    "dealer_price_min": "18.18万",
+                    "official_refer_price": "25.68万",
+                    "sale_status": "在销",
+                    "buy_car_detail_url": "https://bu.chelun.com/xunjia-new/?SerialID=2616&city_id=&car_id=130771&cl=0"
+                }
+            },
+            {
+                "car_id": "130772",
+                "car_name": "B 200 豪华版",
+                "trans_type": "双离合",
+                "gear_num": "7",
+                "exhaust": "1.6",
+                "exhaust_str": "1.6L",
+                "horse_power": "156",
+                "add_press_type": "",
+                "inhale_type": "涡轮增压",
+                "max_power": "115",
+                "max_power_str": "115kW",
+                "peak_power": "",
+                "peak_power_str": "",
+                "link": "http://baojia.chelun.com/yiche-redirectYicheWeb.html?ycre_serialid=2616&ycre_carid=130772&ycre_cityid=0&ycre_flag=1",
+                "jtexts": "",
+                "link_from": "",
+                "market_attribute": {
+                    "year": "2019",
+                    "dealer_price": "20.18-28.66万",
+                    "dealer_price_max": "28.66万",
+                    "dealer_price_min": "20.18万",
+                    "official_refer_price": "27.68万",
+                    "sale_status": "在销",
+                    "buy_car_detail_url": "https://bu.chelun.com/xunjia-new/?SerialID=2616&city_id=&car_id=130772&cl=0"
+                }
+            },
+            {
+                "car_id": "130773",
+                "car_name": "B 260 运动版",
+                "trans_type": "双离合",
+                "gear_num": "7",
+                "exhaust": "2.0",
+                "exhaust_str": "2.0L",
+                "horse_power": "211",
+                "add_press_type": "",
+                "inhale_type": "涡轮增压",
+                "max_power": "155",
+                "max_power_str": "155kW",
+                "peak_power": "",
+                "peak_power_str": "",
+                "link": "http://baojia.chelun.com/yiche-redirectYicheWeb.html?ycre_serialid=2616&ycre_carid=130773&ycre_cityid=0&ycre_flag=1",
+                "jtexts": "",
+                "link_from": "",
+                "market_attribute": {
+                    "year": "2019",
+                    "dealer_price": "25.68-33.98万",
+                    "dealer_price_max": "33.98万",
+                    "dealer_price_min": "25.68万",
+                    "official_refer_price": "33.18万",
+                    "sale_status": "在销",
+                    "buy_car_detail_url": "https://bu.chelun.com/xunjia-new/?SerialID=2616&city_id=&car_id=130773&cl=0"
+                }
+            }
+        ],
+        "link_from": "",
+        "shorttips": {
+            "title": "<font color=\"#666666\">首付3千起，包购置税还送一年保险！</font>",
+            "url": "https://chelun.com/url/QB7FFPxt",
+            "firstword": "爆",
+            "fontcolor": "#ff0000",
+            "bordercolor": "#ff0000"
+        },
+        "EntranceList": [
+            {
+                "type": "1",
+                "title": "旧车换钱",
+                "subTitle": "一键发布全网",
+                "hColor": "#333",
+                "link": "https://chelun.com/url/hBzFGxX",
+                "sort": 0,
+                "icon_url": "https://static.clfile.com/g2/img/p/fund/jiuchehuanqian_bg@2x.png",
+                "jtexts": "http://baojia.chelun.com/static/js/taoche.js"
+            },
+            {
+                "id": "2",
+                "title": "贷款方案",
+                "subTitle": "首付3千起，还送保险",
+                "hColor": "#FF3030",
+                "link": "http://bu.chelun.com/official/#/loan?from=d&flag=8&id=2616_130769",
+                "sort": 3,
+                "icon_url": "https://static.clfile.com/g2/img/p/fund/daikuanfangan_bg@2x.png",
+                "hText": [
+                    "3"
+                ],
+                "jtexts": "http://baojiadev.chelun.com/static/js/taoche.js"
+            }
+        ],
+        "popup": {
+            "open": 0,
+            "type": "1",
+            "text": [
+                "看了这么久，来询个底价吧，真实价格可能更低噢~",
+                "真实价格可能更低，来询个底价吧"
+            ]
+        },
+        "see_button_status": "1",
+        "bottom_button": {
+            "left_button": {
+                "name": "贷款购车",
+                "link_from": "",
+                "url": "http://bu.chelun.com/official/#/loan?from=d&flag=8&id=2616_130769",
+                "is_hidden": 1
+            },
+            "right_button": {
+                "name": "询问底价",
+                "url": "http://baojia.chelun.com/yiche-redirectYicheWeb.html?ycre_serialid=2616&ycre_carid=130769&ycre_cityid=0&ycre_flag=1&ycre_from=1",
+                "jtexts": "",
+                "link_from": "",
+                "is_hidder": 1
+            }
+        },
+        "abTestVRType": 1,
+        "jvrtexts": "http://baojia.chelun.com/static/js/v_.js?v=1.0.2",
+        "vrurl": "https://photo.m.yiche.com/photo/panoout/?id=1408&C=A&open_car_id=130769",
+        "topPriceButton": {
+            "title": "免费询价",
+            "link": "http://baojia.chelun.com/yiche-redirectYicheWeb.html?ycre_serialid=2616&ycre_carid=130769&ycre_cityid=0&ycre_flag=3&ycre_from=1&ycre_isNew=1",
+            "jtexts": ""
+        },
+        "BrandLogo": "http://image.bitautoimg.com/bt/car/default/images/logo/masterbrand/png/100/m_2_100.png",
+        "is_new_energy": 0,
+        "subsidy_title": "APP下载",
+        "subsidy_url": "https://chelun.com/url/zw6F8yam",
+        "new_energy_attribute": {
+            "must_mileageconstant": 0,
+            "min_fast_chargetime": 0,
+            "max_fast_chargetime": 0,
+            "battery_warranty": 0,
+            "battery_capacity": 0
+        },
+        "tags": [],
+        "multimedia": {
+            "video_url": "",
+            "video_pic": "http://img4.bitautoimg.com/newsimg_660x440/Video/2018/11/02/2018112163251251.jpg",
+            "inner_url": "",
+            "outer_url": "https://vr.yiche.com/vr/PanoOutIndex.html?modelId=2616&c=a&app_ver=10.5.0&isNew=1"
+        },
+        "is_show_buycar_invoice": 0,
+        "is_followed": 0
+    },
+    "timestamp": 1563199292,
+    "version": 1
+}

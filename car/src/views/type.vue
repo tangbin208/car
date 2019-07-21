@@ -1,23 +1,24 @@
 <template>
   <div class="wrap">
     <div class="top">
-      <h5>全部车款</h5>
+      <h5 @click="toPicture({car_name:'全部颜色'})" >全部车款</h5>
     </div>
     <div class="nav">
       <p>
-        <span class="active">2019</span>
+        <span v-for="(item,index) in yearType" :key="index" class="active">{{item}}</span>
       </p>
-      <ul>
+      <ul v-for="(item,index) in sortArr" :key="index">
         <li>
-          <h6>1.4L/110kW 涡轮增压</h6>
-          <div>
+          <h6>{{item.title}}</h6>
+          <div v-for="val in item.list" :key="val.car_id" @click="toPicture(val)">
             <p class="first">
-              <span>2019款 35 TFSI 进取版 国V</span>
-              <span>20.65万起</span>
+              <span>{{val.market_attribute.year}}款 {{val.car_name}}</span>
+              <span>{{val.market_attribute.dealer_price_min}}起</span>
+              
             </p>
             <p class="last">
-              <span>150马力7档双离合</span>
-              <span>指导价 29.30万</span>
+                 <span>{{val.horse_power}}马力{{val.gear_num}}档{{val.trans_type}}</span>
+                <span>指导价{{val.market_attribute.dealer_price_max}}</span>
             </p>
           </div>
         </li>
@@ -37,11 +38,26 @@ export default Vue.extend({
     };
   },
   computed: {
-    ...mapState({})
+    ...mapGetters({
+      sortArr:"car/sortArr",
+      yearType:"car/yearType"
+    })
   },
-  methods: {},
+  methods: {
+     ...mapMutations({
+      getTypeId:"picture/getTypeId"
+    }),
+    toPicture(type:object){
+      this.getTypeId(type)
+      this.$router.push({
+        name:"picture",
+      })
+    }
+  },
   created() {},
-  mounted() {}
+  mounted() {
+    console.log("arr",this.yearType)
+  }
 });
 </script>
 <style scoped lang="scss">

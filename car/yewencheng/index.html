@@ -1,0 +1,16 @@
+<!DOCTYPE html><html lang=en><head><meta charset=utf-8><meta http-equiv=X-UA-Compatible content="IE=edge"><meta name=viewport content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=0"><meta name=referrer content=no-referrer><link rel=icon href=/favicon.ico><title>car</title><script>// 计算rem
+      var fun = function (doc, win) {
+      var docEl = doc.documentElement,
+        resizeEvt = 'orientationchange' in window ? 'orientationchange' : 'resize',
+        recalc = function () {
+          var clientWidth = docEl.clientWidth;
+          if (!clientWidth) return;
+            //这里是假设在750px宽度设计稿的情况下，1rem = 100px；
+            //可以根据实际需要修改
+            docEl.style.fontSize = (clientWidth / 750) * 100 + 'px';
+          };
+        if (!doc.addEventListener) return;
+        win.addEventListener(resizeEvt, recalc, false);
+        doc.addEventListener('DOMContentLoaded', recalc, false);
+      }
+      fun(document, window);</script><link href=/css/chunk-131b8f4c.7cef3558.css rel=prefetch><link href=/css/chunk-605a2356.c4a4bf4f.css rel=prefetch><link href=/css/chunk-6b71d108.31fc68c0.css rel=prefetch><link href=/css/chunk-c81649d8.abffdc0d.css rel=prefetch><link href=/css/chunk-c8ac9f90.1599b38a.css rel=prefetch><link href=/js/chunk-131b8f4c.a8243b8e.js rel=prefetch><link href=/js/chunk-605a2356.7a965989.js rel=prefetch><link href=/js/chunk-6b71d108.f326a9f6.js rel=prefetch><link href=/js/chunk-c81649d8.73ac6c53.js rel=prefetch><link href=/js/chunk-c8ac9f90.bec1aa62.js rel=prefetch><link href=/css/app.a3faf164.css rel=preload as=style><link href=/js/app.96a202fa.js rel=preload as=script><link href=/js/chunk-vendors.77b007c8.js rel=preload as=script><link href=/css/app.a3faf164.css rel=stylesheet></head><body><noscript><strong>We're sorry but car doesn't work properly without JavaScript enabled. Please enable it to continue.</strong></noscript><div id=app></div><script src=/js/chunk-vendors.77b007c8.js></script><script src=/js/app.96a202fa.js></script></body></html>

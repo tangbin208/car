@@ -1,0 +1,35 @@
+@function px($px) {
+  //$px为需要转换的字号
+  @return $px / 100 * 1rem;
+}
+
+.buttonBlue {
+  background: #00afff;
+  color: #fff;
+  border-radius: 0.1rem;
+  border: none;
+  box-sizing: border-box;
+}
+.hover {
+  transition: opacity 0.1s;
+}
+.hover:active {
+  opacity: 0.7;
+}
+.flexBetween {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.mask {
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  z-index: 1000;
+  width: 100%;
+  height: 100%;
+  background-color: #00000099;
+  overflow: hidden;
+}

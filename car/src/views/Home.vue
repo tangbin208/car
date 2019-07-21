@@ -1,31 +1,36 @@
 <template>
-<div class="wrap">
-  <div class="main" ref="wrap">
-    <ul>
-      <li v-for="(item,index) in Object.keys(list)" :key="index">
-        <h4 ref="tit">{{item}}</h4>
-        <ol>
-          <li v-for="val in list[item]" :key="val.MasterID" @tap="toMask(val.MasterID)">
-            <img :src="val.CoverPhoto" />
-            <p>
-              <span>{{val.Name}}</span>
-            </p>
-          </li>
-        </ol>
-      </li>
-    </ul>
+  <div class="wrap">
+    <div class="main" ref="wrap">
+      <ul>
+        <li v-for="(item,index) in Object.keys(list)" :key="index">
+          <h4 ref="tit">{{item}}</h4>
+          <ol>
+            <li v-for="val in list[item]" :key="val.MasterID" @tap="toMask(val.MasterID)">
+              <img :src="val.CoverPhoto" />
+              <p>
+                <span>{{val.Name}}</span>
+              </p>
+            </li>
+          </ol>
+        </li>
+      </ul>
+    </div>
     <ol class="fixed" @touchstart="touchStart" @touchmove="touchMove" @touchend="touchEnd">
-      <li @tap="toList(index)" v-for="(item,index) in Object.keys(list)" :key="index">{{item}}</li>
+      <li @click="toList(index)" v-for="(item,index) in Object.keys(list)" :key="index">{{item}}</li>
     </ol>
     <span v-if="isTouch" class="letter">{{current}}</span>
-  </div>
-   <div ref="mask" :class="['mask',mask?'show':'hide']">
+    <div ref="mask" :class="['mask',mask?'show':'hide']">
       <v-touch @swiperight="right" class="myTouch">
         <ul v-for="item in maskList" :key="item.GroupId">
           <li>
             <h4>{{item.GroupName}}</h4>
             <ol>
-              <li class="maskLi" v-for="val in item.GroupList" :key="val.SerialID">
+              <li
+                class="maskLi"
+                v-for="val in item.GroupList"
+                :key="val.SerialID"
+                @click="toCar(val.SerialID)"
+              >
                 <img class="picture" :src="val.Picture" />
                 <p>
                   <span class="aliasName">{{val.AliasName}}</span>
@@ -37,8 +42,7 @@
         </ul>
       </v-touch>
     </div>
-</div>
-  
+  </div>
 </template>
 
 <script lang="ts">
@@ -52,7 +56,7 @@ export default Vue.extend({
   data() {
     return {
       mask: false,
-      current: "",
+      currentIndex: 0,
       isTouch: false
     };
   },
@@ -60,7 +64,10 @@ export default Vue.extend({
     ...mapState({
       list: (state: any) => state.home.list,
       maskList: (state: any) => state.home.maskList
-    })
+    }),
+    current(state: any): any {
+      return Object.keys(this.list)[this.currentIndex];
+    }
   },
   methods: {
     ...mapActions({
@@ -69,7 +76,8 @@ export default Vue.extend({
     }),
     //楼层
     toList(ind: number) {
-       this.current = Object.keys(this.list)[ind];
+      // console.log("tap");
+      // this.current = Object.keys(this.list)[ind];
       this.bscroll.scrollTo(0, -this.$refs.tit[ind].offsetTop);
     },
     //弹抽屉
@@ -81,14 +89,11 @@ export default Vue.extend({
     right() {
       this.mask = false;
     },
-    //滑过列表
-    touchStart(e: Event): void {
-      this.isTouch = true;
-    },
-    touchMove(e: Event): void {
-      // console.log('e...', e);
+    touchTo(e) {
+      // console.log(e);
       let pageY = e.touches[0].pageY;
       let letterHeight = ((0.4 * window.innerWidth) / 750) * 100;
+      // 0.4为li的高度
       let letterOffsetTop =
         (window.innerHeight - letterHeight * Object.keys(this.list).length) / 2;
       let letterIndex = Math.floor((pageY - letterOffsetTop) / letterHeight);
@@ -100,23 +105,51 @@ export default Vue.extend({
       if (letterIndex > Object.keys(this.list).length - 1) {
         letterIndex = Object.keys(this.list).length - 1;
       }
-      // console.log('letter...', Object.keys(this.list)[letterIndex]);
-      this.current = Object.keys(this.list)[letterIndex];
-      this.toList(letterIndex)
+      // console.log({
+      //   pageY,
+      //   innerWidth: window.innerWidth,
+      //   letterHeight,
+      //   letterOffsetTop,
+      //   letterIndex
+      // });
+
+      this.currentIndex = letterIndex;
+    },
+    //滑过列表
+    touchStart(e: Event): void {
+      this.isTouch = true;
+      this.touchTo(e);
+    },
+    touchMove(e: any): void {
+      this.touchTo(e);
+      this.toList(this.currentIndex);
     },
     touchEnd(e: Event): void {
       this.isTouch = false;
-      this.current = "";
+    },
+    toCar(SerialID: string) {
+      this.$router.push({
+        name: "car",
+        params: {
+          id: SerialID
+        }
+      });
+    },
+    async getScrollList() {
+      await this.getList();
+      this.$nextTick(() => {
+        this.bscroll = new BScroll(this.$refs.wrap, {
+          probeType: 2,
+          tap: true
+        });
+      });
     }
   },
   created() {
-    this.getList();
+    this.getScrollList();
   },
-  mounted() {
-    this.bscroll = new BScroll(this.$refs.wrap, {
-      probeType: 2,
-      tap: true
-    });
+  updated() {
+    // this.bscroll.refresh();
   }
 });
 </script>
@@ -124,11 +157,11 @@ export default Vue.extend({
 .wrap {
   flex: 1;
   position: relative;
- 
-  .main{
+
+  .main {
     width: 100%;
     height: 100%;
-     overflow: hidden;
+    overflow: hidden;
   }
 }
 ul {
@@ -176,7 +209,9 @@ ul {
     color: #666;
     font-weight: 500;
     padding: 2px 10px;
-    font-size: 0.24rem;
+    font-size: 0.3rem;
+    height: 0.4rem;
+    box-sizing: border-box;
   }
 }
 .mask {
@@ -191,6 +226,10 @@ ul {
   box-sizing: border-box;
   overflow-y: auto;
   border-left: 1px solid #eee;
+  ol li {
+    padding-left: 10px;
+    box-sizing: border-box;
+  }
   &.show {
     transform: translateX(0);
     transition: all 1s;
@@ -208,6 +247,9 @@ ul {
   .aliasName {
     font-size: 0.34rem;
     color: #5f687a;
+    width: 100%;
+    padding-right: 10px;
+    box-sizing: border-box;
   }
   .price {
     margin-top: 0.1rem;
@@ -218,19 +260,19 @@ ul {
 .myTouch {
   touch-action: pan-y !important;
 }
- .letter{
-    display: inline-block;
-    width: 1.6rem;
-    height: 1.6rem;
-    background: rgba(0,0,0, .6);
-    border-radius: .1rem;
-    top: 50%;
-    left: 50%;
-    position: fixed;
-    color: #fff;
-    font-size: .8rem;
-    text-align: center;
-    line-height: 1.6rem;
-    transform: translate3d(-50%, -50%, 0);
-  }
+.letter {
+  display: inline-block;
+  width: 1.6rem;
+  height: 1.6rem;
+  background: rgba(0, 0, 0, 0.6);
+  border-radius: 0.1rem;
+  top: 50%;
+  left: 50%;
+  position: fixed;
+  color: #fff;
+  font-size: 0.8rem;
+  text-align: center;
+  line-height: 1.6rem;
+  transform: translate3d(-50%, -50%, 0);
+}
 </style>

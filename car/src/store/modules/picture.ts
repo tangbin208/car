@@ -1,13 +1,20 @@
-import {toDetailData,getAllColor,getCarImg} from "../../server/home"
+import {toDetailData,getAllColor,getCarImg} from "@/services"
 // 原始数据
 const state={
-  pictureList:[],
-  SerialID:"2593",
-   detailPictureList:[],
+   pictureList:[],
+   detailPictureList:{
+     List:[]
+   },
    allColor:{},
    ImageID:null,
-   
-   isload:false
+   isload:false,
+   getColorId:{
+    ColorID:undefined
+   },
+   getTypeId:{
+    car_id:undefined,
+    market_attribute:{}
+   }
 }
 
 //派生数据
@@ -17,20 +24,20 @@ const getters={
 //异步改变
 const actions={
     //获取图片数据
-    async getPicture({commit},id:string){
+    async getPicture({commit,rootState}){
       let data= await getCarImg({
-        SerialID:"2593"
+        SerialID:rootState.car.SerialID
       })
       commit("updatePicture",data.data)
     },
-    async toDetail({commit,state},{ImageID=state.ImageID,ColorID,Page=1,PageSize=30}){
+    async toDetail({commit,state,rootState},{ImageID=state.ImageID,ColorID,Page=1,PageSize=30}){
       if(Page===1){
         await commit("updateIsLoad",false)
       }
       if(state.isload)return
       commit("updateImageId",ImageID)
       let data= await toDetailData({
-        SerialID:state.SerialID,
+        SerialID:rootState.car.SerialID,
         ImageID:ImageID||state.ImageID,
         ColorID:ColorID||null,
         Page:Page,
@@ -48,16 +55,17 @@ const actions={
       commit("updateDetailPictureList",data.data)
     },
     //获取全部颜色
-    async getAllColor({commit,state}){
-      let data=await getAllColor(state.SerialID)
+    async getAllColor({commit,rootState}){
+      let data=await getAllColor(rootState.car.SerialID)
        commit("updateColor",data.data)
     },
     //根据条件获取图片
-    async getColorPicture({commit},{SerialID,CarID,ColorID}){
+    async getColorPicture({commit,state,rootState}){
+      console.log(state.getColorId.ColorId)
       let data=await getCarImg({
-        SerialID:SerialID||state.SerialID,
-        ColorID:ColorID||null,
-        CarID:CarID||null
+        SerialID:rootState.car.SerialID,
+        ColorID:state.getColorId.ColorId,
+        CarID:state.getTypeId.car_id
       })
       commit('updatePicture',data.data)
     },
@@ -100,7 +108,13 @@ const mutations={
       updateIsLoad(state,payload){
         console.log("state",payload)
         state.isload=payload
-      }
+      },
+      getColorId(state,payload){
+         state.getColorId=payload
+      },
+      getTypeId(state,payload){
+        state.getTypeId=payload
+     }
 
 }
 

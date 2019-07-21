@@ -1,4 +1,4 @@
-import {getHomeData,getDetailData} from "../../server/home"
+import {getHomeData,getDetailData} from "@/services"
 // 原始数据
 const state={
    list:[],

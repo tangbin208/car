@@ -15,7 +15,6 @@ VueTouch.config.swipe = {
 
 }
 import '@/scss/reset.css';
-
 new Vue({
   router,
   store,
